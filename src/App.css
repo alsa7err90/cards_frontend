@@ -1,0 +1,23 @@
+.content-pages{
+     padding: 10px;
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.profile_container{
+     display: flex;
+     justify-content: space-between;
+     gap: 10px;
+     width: 100%;
+     margin-top: 80px;
+     padding: 40px;
+}
+
+.app_container{
+     padding: 0 80px;
+}
+
+@media (max-width: 640px) {
+     .app_container {
+               padding: 0 10px;
+          }
+}
