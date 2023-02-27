@@ -5,7 +5,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import {useDispatch, useSelector} from "react-redux";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
-
+import {Swiper, SwiperSlide} from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
 import {
   setNewBouquets,
   setNewCards,
@@ -19,7 +21,8 @@ import {
 import LodaingSpinner from "../components/LodaingSpinner";
 import Marquee from "react-fast-marquee";
 import {Card} from "react-bootstrap";
-
+import {Autoplay} from "swiper";
+import {motion} from "framer-motion";
 function HomePage() {
   const dispatch = useDispatch();
 
@@ -79,27 +82,66 @@ function HomePage() {
   }, []);
   return (
     <>
-      <div style={{marginBottom: "100px"}}>
+      <motion.div
+        initial={{opacity: 0}}
+        whileInView={{opacity: 1}}
+        transition={{duration: 0.7}}
+        className="flex flex-col items-center gap-40 w-full relative mt-48"
+        style={{marginBottom: "100px"}}
+      >
         {spinner ? (
           <LodaingSpinner />
         ) : (
-          <>
+          <motion.div
+            initial={{opacity: 0}}
+            whileInView={{opacity: 1}}
+            transition={{duration: 0.7}}
+          >
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={0}
+              slidesPerView={1}
+              onSwiper={swiper => console.log(swiper)}
+              autoplay={{delay: 4000}}
+              loop={true}
+            >
+              {ads.map((item, index) => (
+                <SwiperSlide>
+                  <img
+                    alt="slide"
+                    key={item.url}
+                    src={item.url}
+                    width="100%"
+                    height="100%"
+                    style={{
+                      borderRadius: "10px",
+                      borderBottomLeftRadius: "0",
+                      borderBottomRightRadius: "0",
+                      borderTopLeftRadius: "10px",
+                      borderTopRightRadius: "10px",
+                      cursor: "grab",
+                    }}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
             <Marquee
-              speed="10"
+              speed="40"
               style={{
-                background: "#7d5fff",
-                color: "#fff",
+                backgroundColor: "#cac7c78c",
+                color: "black",
                 "--gradient-color": "inherit !important",
+                height: "50px",
+                fontSize: "large",
+                borderBottomLeftRadius: "10px",
+                borderBottomRightRadius: "10px",
+                borderTopLeftRadius: "0px",
+                borderTopRightRadius: "0px",
               }}
               direction="right"
             >
               {news ? news.map(new1 => new1.text + " | ") : ""}
             </Marquee>
-            <AwesomeSlider>
-              {ads.map((item, index) => (
-                <div key={index} data-src={item.url} />
-              ))}
-            </AwesomeSlider>
             <div className="cards_container">
               {cards.map((item, index) => (
                 <Card key={index} className="card_shadow">
@@ -128,11 +170,18 @@ function HomePage() {
                 </Card>
               ))}
             </div>
-          </>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </>
   );
 }
 
 export default HomePage;
+/* 
+<AwesomeSlider>
+              {ads.map((item, index) => (
+                <div key={index} data-src={item.url} />
+              ))}
+            </AwesomeSlider>
+*/

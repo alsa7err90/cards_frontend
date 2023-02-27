@@ -11,6 +11,7 @@ import {
 } from "react-icons/ai";
 import {useRef} from "react";
 import {useEffect} from "react";
+import {financialFloat} from "../functions.js/functions";
 
 function SideMenu() {
   const logged = useSelector(state => state.userReducer.logged);
@@ -35,9 +36,21 @@ function SideMenu() {
   return (
     <>
       <div className={toggleMenuOld ? "sidebar active" : "sidebar"}>
-        <div className="profile">
+        <div className="profile shadow-sm">
           <h3>{user.name}</h3>
           <p>{user.email}</p>
+          <p
+            style={{
+              fontSize: "18px",
+              fontWeight: "bold",
+              margin: "5px 0",
+              backgroundColor: "#EB455F",
+              color: "white",
+              padding: "4px",
+            }}
+          >
+            {financialFloat(user.balance)} $ :رصيدي
+          </p>
           <div className="div_icons">
             <NavLink
               onClick={closeMenu}
@@ -67,7 +80,7 @@ function SideMenu() {
             </span>
           </div>
         </div>
-        <ul>
+        <ul className="shadow-sm">
           <li>
             <NavLink
               onClick={closeMenu}
@@ -78,7 +91,7 @@ function SideMenu() {
               <span className="icon">
                 <i className="fas fa-home"></i>
               </span>
-              <span className="item">Home</span>
+              <span className="item">الصفحة الرئيسية</span>
             </NavLink>
           </li>
 
@@ -156,9 +169,9 @@ function SideMenu() {
           </li>
         </ul>
         <ul className="div_icons">
-          <AiOutlineFacebook size={30} style={{cursor: "pointer"}} />
-          <AiOutlineTwitter size={30} style={{cursor: "pointer"}} />
-          <AiOutlineYoutube size={30} style={{cursor: "pointer"}} />
+          <AiOutlineFacebook size={25} style={{cursor: "pointer"}} />
+          <AiOutlineTwitter size={25} style={{cursor: "pointer"}} />
+          <AiOutlineYoutube size={25} style={{cursor: "pointer"}} />
         </ul>
       </div>
     </>

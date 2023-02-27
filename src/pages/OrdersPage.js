@@ -9,6 +9,7 @@ import {searchOrders} from "../network/cardsNet";
 import InputComponent from "../components/InputComponent";
 import LodaingSpinner from "../components/LodaingSpinner";
 import Table from "react-bootstrap/Table";
+import {motion} from "framer-motion";
 
 const OrdersPage = () => {
   const [countAllOrders, setCountAllOrders] = useState(0);
@@ -79,12 +80,23 @@ const OrdersPage = () => {
   }
   return (
     <>
-      <div className="content">
+      <motion.div
+        initial={{opacity: 0}}
+        whileInView={{opacity: 1}}
+        transition={{duration: 0.7}}
+        className="flex flex-col items-center gap-40 w-full relative mt-48"
+        style={{marginBottom: "100px"}}
+      >
         {spinner ? (
           <LodaingSpinner />
         ) : (
           <>
-            <div className="container3">
+            <motion.div
+              initial={{opacity: 0}}
+              whileInView={{opacity: 1}}
+              transition={{duration: 0.7}}
+              className="container3"
+            >
               <div className="row">
                 <div class="four col-md-3 col-6 pt-1">
                   <div class="counter-box colored">
@@ -112,8 +124,13 @@ const OrdersPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="form_search">
+            </motion.div>
+            <motion.div
+              initial={{opacity: 0}}
+              whileInView={{opacity: 1}}
+              transition={{duration: 0.7}}
+              className="form_search"
+            >
               <Form
                 onSubmit={handlePayout}
                 ref={form}
@@ -173,9 +190,14 @@ const OrdersPage = () => {
                   </button>
                 </div>
               </Form>
-            </div>
+            </motion.div>
 
-            <div className="content-table-data">
+            <motion.div
+              initial={{opacity: 0}}
+              whileInView={{opacity: 1}}
+              transition={{duration: 0.7}}
+              className="content-table-data"
+            >
               <Table responsive>
                 <thead>
                   <tr>
@@ -205,10 +227,10 @@ const OrdersPage = () => {
                     : ""}
                 </tbody>
               </Table>
-            </div>
+            </motion.div>
           </>
         )}
-      </div>
+      </motion.div>
     </>
   );
 };

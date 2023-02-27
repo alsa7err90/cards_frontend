@@ -5,6 +5,7 @@ import {getNoty} from "../network/pagesNet";
 import {setNewCountNoty, setNewNoty} from "../redux/actions/userActions";
 import LodaingSpinner from "../components/LodaingSpinner";
 import {IoMdNotificationsOutline} from "react-icons/io";
+import {motion} from "framer-motion";
 
 const Noty = () => {
   const noties = useSelector(state => state.userReducer.noty);
@@ -25,14 +26,28 @@ const Noty = () => {
       {spinner ? (
         <LodaingSpinner />
       ) : (
-        <>
+        <motion.div
+          initial={{opacity: 0}}
+          whileInView={{opacity: 1}}
+          transition={{duration: 0.7}}
+        >
           <div class="notification-ui_dd-content" dir="rtl">
             {noties.map((noty, index) => (
-              <a href="#!" key={index} className="notification_container">
-                <IoMdNotificationsOutline size={25} />
-                <div className="notification-list text-dark">
+              <a
+                href="#!"
+                key={index}
+                className="notification_container"
+                style={{width: "100%"}}
+              >
+                <div>
+                  <IoMdNotificationsOutline size={25} />
+                </div>
+                <div
+                  className="notification-list text-dark"
+                  style={{width: "100%"}}
+                >
                   <div class="notification-list_img"></div>
-                  <div class="notification-list_detail">
+                  <div class="notification-list_detail" style={{width: "100%"}}>
                     <p>
                       <b>{noty.data.title}</b> <br />{" "}
                     </p>
@@ -47,7 +62,7 @@ const Noty = () => {
               </a>
             ))}
           </div>
-        </>
+        </motion.div>
       )}
     </>
   );

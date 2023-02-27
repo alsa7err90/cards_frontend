@@ -1,4 +1,11 @@
 import React from "react";
+import {
+  AiOutlineFacebook,
+  AiOutlineSearch,
+  AiOutlineTwitter,
+  AiOutlineYoutube,
+} from "react-icons/ai";
+import {IoMdNotificationsOutline} from "react-icons/io";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import {financialFloat} from "../functions.js/functions";
@@ -29,20 +36,26 @@ function Header() {
             </h2>
           </Link>
         </div>
-        <p>
-          {financialFloat(user.balance)} ${" :رصيدي"}
-        </p>
-        <div className="hamburger">
-          <a
-            href="#"
-            id="hamburger_a"
-            onClick={toggleMenuNow}
-            className={!toggleMenuOld ? "hamburger_active" : ""}
-          >
-            <span className="span1"></span>
-            <span className="span2"></span>
-            <span className="span1"></span>
-          </a>
+
+        <div style={{display: "flex", alignItems: "center", gap: "20px"}}>
+          <NavLink to={"/search"}>
+            <AiOutlineSearch color="black" size={25} />
+          </NavLink>
+          <NavLink to={"/noty"}>
+            <IoMdNotificationsOutline color="black" size={25} />
+          </NavLink>
+          <div className="hamburger">
+            <a
+              href="#"
+              id="hamburger_a"
+              onClick={toggleMenuNow}
+              className={!toggleMenuOld ? "hamburger_active" : ""}
+            >
+              <span className="span1"></span>
+              <span className="span2"></span>
+              <span className="span1"></span>
+            </a>
+          </div>
         </div>
       </div>
     </>
@@ -79,4 +92,9 @@ export default Header;
             Notyfication
           </NavLink>
         </nav>
+*/
+/* 
+<p>
+          {financialFloat(user.balance)} ${" :رصيدي"}
+        </p>
 */

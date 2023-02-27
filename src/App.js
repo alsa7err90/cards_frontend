@@ -81,10 +81,6 @@ function App() {
           <div className="wrapper">
             <div className={toggleMenuOld ? "section active" : "section"}>
               <Header />
-              <div
-                onClick={toggleMenuNow}
-                className={!toggleMenuOld ? "layerOver active" : "layerOver"}
-              ></div>
 
               <div className="app_container">
                 <Routes>
@@ -119,7 +115,13 @@ function App() {
           </div>
         </section>
       )}
-      <div className="menu">
+    </>
+  );
+}
+
+export default App;
+/* 
+<div className="menu">
         <div className="tab-nav-container">
           <div
             className={
@@ -195,8 +197,10 @@ function App() {
           </div>
         </div>
       </div>
-    </>
-  );
-}
-
-export default App;
+*/
+/* 
+<div
+                onClick={toggleMenuNow}
+                className={!toggleMenuOld ? "layerOver active" : "layerOver"}
+              ></div>
+*/

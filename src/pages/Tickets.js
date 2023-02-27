@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import {useMessage} from "../hooks/tickets/useMessage";
 import {useTitle} from "../hooks/tickets/useTitle";
+import {motion} from "framer-motion";
 
 const Tickets = () => {
   const [content, setContent] = useState([]);
@@ -49,7 +50,12 @@ const Tickets = () => {
   }, []);
 
   return (
-    <div className="" style={{marginTop: "80px"}}>
+    <motion.div
+      initial={{opacity: 0}}
+      whileInView={{opacity: 1}}
+      transition={{duration: 0.7}}
+      style={{marginTop: "80px"}}
+    >
       <div className="">
         {/* <Link
             to={"/NewTicket"}
@@ -146,7 +152,7 @@ const Tickets = () => {
           </button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </motion.div>
   );
 };
 

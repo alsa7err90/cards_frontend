@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import LodaingSpinner from "../components/LodaingSpinner";
+import {motion} from "framer-motion";
+
 function GetewayPage() {
-  let { id } = useParams();
+  let {id} = useParams();
   const [spinner, setSpinner] = useState(true);
   const [cards, setCards] = useState([]);
   const [selected, setSelected] = useState(0);
@@ -31,36 +33,39 @@ function GetewayPage() {
   }, []);
   return (
     <>
-    
-    <div className="content">
-      {spinner ? (
-        <LodaingSpinner />
-      ) : (
-        <>
-          <main>
-            <h2>Welcome to the GetewayPage!</h2>
-            <p>You can do this, I believe in you.</p>
-          </main>
+      <div className="content">
+        {spinner ? (
+          <LodaingSpinner />
+        ) : (
+          <motion.div
+            initial={{opacity: 0}}
+            whileInView={{opacity: 1}}
+            transition={{duration: 0.7}}
+          >
+            <main>
+              <h2>Welcome to the GetewayPage!</h2>
+              <p>You can do this, I believe in you.</p>
+            </main>
 
-          {cards.map((number) => (
-            <li
-              onClick={() => selectCard(number.id)}
-              className={selected === number.id ? "activeCard" : ""}
-            >
-              {number.amount}
-            </li>
-          ))}
-          <br />
-          <input
-            value={account}
-            onChange={(e) => setAccount(e.target.value)}
-            type="text"
-          />
-          <br />
-          {loading ? "loading...." : <></>}
-          <button onClick={postGift}>buy now</button>
-        </>
-      )}
+            {cards.map(number => (
+              <li
+                onClick={() => selectCard(number.id)}
+                className={selected === number.id ? "activeCard" : ""}
+              >
+                {number.amount}
+              </li>
+            ))}
+            <br />
+            <input
+              value={account}
+              onChange={e => setAccount(e.target.value)}
+              type="text"
+            />
+            <br />
+            {loading ? "loading...." : <></>}
+            <button onClick={postGift}>buy now</button>
+          </motion.div>
+        )}
       </div>
     </>
   );

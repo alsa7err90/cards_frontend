@@ -9,6 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {Form} from "react-bootstrap";
+import {motion} from "framer-motion";
+
 const BouquetsPage = () => {
   let {id} = useParams();
   const [cards, setCards] = useState([]);
@@ -165,9 +167,12 @@ const BouquetsPage = () => {
         setLoading(false);
       });
   };
-
   return (
-    <React.Fragment>
+    <motion.div
+      initial={{opacity: 0}}
+      whileInView={{opacity: 1}}
+      transition={{duration: 0.7}}
+    >
       <div
         style={{
           display: "flex",
@@ -317,53 +322,69 @@ const BouquetsPage = () => {
               </Modal.Footer>
             </Modal>
 
-            {cards.map((item, index) => (
-              <Card
-                style={{width: "18rem"}}
-                key={index}
-                className="card_shadow"
+            <section className="cards_bouquets_container">
+              <h2
+                style={{
+                  textAlign: "center",
+                  boxShadow: "0px 5px 25px #0000001a",
+                  width: "100%",
+                  padding: "10px",
+                }}
               >
-                <span
-                  className={
-                    item.status === "1" ? "available yes" : "available no"
-                  }
-                ></span>
-                <Card.Img variant="top" src={image} />
-                <div>
-                  <Card.Title>{item.name}</Card.Title>
-                  <Card.Text>
-                    <span className="newStyleBalance">{item.points} </span>
+                {cards[0].name}
+              </h2>
+              {cards.map((item, index) => (
+                <React.Fragment>
+                  <span
+                    className={
+                      item.status === "1" ? "available yes" : "available no"
+                    }
+                  ></span>
+                  <div key={index} className="card_shadow_bouquests">
+                    <img variant="top" src={image} />
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text>
+                      <span className="newStyleBalance">{item.points} </span>
 
-                    <span className="price-card float-bros-end">
-                      {item.price} $
-                    </span>
-                  </Card.Text>
-
-                  {item.is_buy_by_player_id == 1 ? (
-                    <Button
-                      variant="primary"
-                      className="btn_view"
-                      onClick={() => selectCard(item.id)}
-                      style={{marginBottom: 0, borderRadius: "0 0px 3px 3px"}}
-                    >
-                      <span style={{paddingTop: "20px"}}>شراء </span>
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="primary"
-                      className="btn_view"
-                      onClick={() => selectCard(item.id)}
-                    >
-                      <span>شراء </span>
-                    </Button>
-                  )}
-                </div>
-              </Card>
-            ))}
+                      <span className="price-card float-bros-end">
+                        {item.price} $
+                      </span>
+                    </Card.Text>
+                    <div>
+                      {item.is_buy_by_player_id == 1 ? (
+                        <Button
+                          variant="primary"
+                          className="btn_view"
+                          style={{
+                            marginBottom: 0,
+                            borderRadius: "3px",
+                          }}
+                          onClick={() => selectCard(item.id)}
+                        >
+                          <span style={{paddingTop: "20px"}}>شراء </span>
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="primary"
+                          className="btn_view"
+                          style={{
+                            marginBottom: 0,
+                            borderRadius: "3px",
+                          }}
+                          onClick={() => selectCard(item.id)}
+                        >
+                          <span>شراء </span>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </React.Fragment>
+              ))}
+            </section>
           </React.Fragment>
         )}
       </div>{" "}
-    </React.Fragment>
+    </motion.div>
   );
 };
 

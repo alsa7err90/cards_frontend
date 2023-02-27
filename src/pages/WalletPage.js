@@ -4,6 +4,7 @@ import {financialFloat} from "../functions.js/functions";
 import {getWallet} from "../network/userNet";
 import LodaingSpinner from "../components/LodaingSpinner";
 import Table from "react-bootstrap/Table";
+import {motion} from "framer-motion";
 const WalletPage = () => {
   const [balance, setBalance] = useState(0);
   const [balanceIn, setBalanceIn] = useState(0);
@@ -34,11 +35,15 @@ const WalletPage = () => {
 
   return (
     <>
-      <div className="content">
+      <div className="">
         {spinner ? (
           <LodaingSpinner />
         ) : (
-          <>
+          <motion.div
+            initial={{opacity: 0}}
+            whileInView={{opacity: 1}}
+            transition={{duration: 0.7}}
+          >
             <div className="container3">
               <div className="row">
                 <div class="four col-4">
@@ -73,7 +78,16 @@ const WalletPage = () => {
               >
                 <div className="card-date-start">
                   <div className="form-group">
-                    <label for="date_start">تاريخ البدء</label>
+                    <label
+                      for="date_start"
+                      style={{
+                        textAlign: "end",
+                        width: "100%",
+                        margin: "10px 0",
+                      }}
+                    >
+                      تاريخ البدء
+                    </label>
                     <input
                       id="date_start"
                       type="date"
@@ -85,7 +99,16 @@ const WalletPage = () => {
                 </div>
                 <div className="card-date-end">
                   <div className="form-group">
-                    <label for="date_end">تاريخ الانتهاء</label>
+                    <label
+                      for="date_end"
+                      style={{
+                        textAlign: "end",
+                        width: "100%",
+                        margin: "10px 0",
+                      }}
+                    >
+                      تاريخ الانتهاء
+                    </label>
                     <input
                       id="date_end"
                       type="date"
@@ -129,7 +152,7 @@ const WalletPage = () => {
                 </tbody>
               </Table>
             </div>
-          </>
+          </motion.div>
         )}
       </div>
     </>

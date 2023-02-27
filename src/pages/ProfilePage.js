@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 import {getProfile, updatePassword, updateProfile} from "../network/userNet";
 import LodaingSpinner from "../components/LodaingSpinner";
+import {motion} from "framer-motion";
 
 function ProfilePage() {
   const [dataUser, setDatauser] = useState(0);
@@ -71,9 +72,18 @@ function ProfilePage() {
         {spinner ? (
           <LodaingSpinner />
         ) : (
-          <>
-            <div class="col-lg-4">
+          <motion.div
+            initial={{opacity: 0}}
+            whileInView={{opacity: 1}}
+            transition={{duration: 0.7}}
+          >
+            <div class="col-lg-12">
               <div class="card mb-4">
+                <h2
+                  style={{textAlign: "center", width: "100%", margin: "20px 0"}}
+                >
+                  معلوماتي الشخصية
+                </h2>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
@@ -95,9 +105,18 @@ function ProfilePage() {
                 </div>
               </div>
             </div>
-            <div className="profile_container_edit_info col-lg-8">
+            <div className="profile_container_edit_info col-lg-12">
               <div class="col-lg-12">
                 <div class="card mb-4">
+                  <h2
+                    style={{
+                      textAlign: "center",
+                      width: "100%",
+                      margin: "20px 0",
+                    }}
+                  >
+                    تحديث معلوماتي الشخصية{" "}
+                  </h2>
                   <div class="card-body">
                     <div class="row">
                       <div class="col-sm-3">
@@ -263,7 +282,7 @@ function ProfilePage() {
                 </div>
               </div>
             </div>
-          </>
+          </motion.div>
         )}
       </div>
     </>
